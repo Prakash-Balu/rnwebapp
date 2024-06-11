@@ -1,8 +1,23 @@
-import React, {useEffect, useRef} from 'react';
-import {Animated, StyleSheet, SafeAreaView, Image} from 'react-native';
-import Video from 'react-native-video';
+import React, {useEffect, useRef } from 'react';
+import {Animated, StyleSheet, SafeAreaView, Image, View } from 'react-native';
+// import Video from 'react-native-video';
+import { createElement } from 'react';
 
-const App = () => {
+//   const handleVideoEnd = () => {
+//     navigation.navigate("WelcomeScreen");
+//   }
+
+const videoattrs = {
+  src: "./assets/Videoes/splash_screen.mp4",
+  // poster: "https://www.fillmurray.com/500/360",
+  controls: "controls",
+  autoPlay: true,
+  onEnded: () => {
+    console.log("video ended");
+  }
+};
+
+const SplashScreen = () => {
   // fadeAnim will be used as the value for opacity. Initial Value: 0
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -14,6 +29,11 @@ const App = () => {
     }).start();
   }, [fadeAnim]);
 
+
+  const createVideo=(attrs:any) => {
+    return createElement("video", attrs);
+  }
+
   return (
       <SafeAreaView style={styles.container}>
         <Animated.View
@@ -22,19 +42,14 @@ const App = () => {
             {opacity: fadeAnim},
           ]}>
           <Image
-            source={require('./assets/images/newLogo.png')}
+            source={{uri: './assets/images/newLogo.png'}}
             resizeMode="contain"
             style={{width: '100%', height: 180}}
           />
         </Animated.View>
-        <Video
-          source={require('./assets/Videoes/splash_screen.mp4')}
-          style={styles.video}
-          controls={false}
-          resizeMode="contain"
-          repeat={false}
-          // onEnd={handleVideoEnd} // Navigate to WelcomeScreen when video ends
-        />
+        <View>
+          {createVideo(videoattrs)}
+        </View>
       </SafeAreaView>
   );
 };
@@ -52,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default SplashScreen;

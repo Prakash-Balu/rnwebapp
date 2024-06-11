@@ -31,7 +31,7 @@ const babelLoaderConfiguration = {
   include: [
     path.resolve(__dirname, "index.web.ts"), // Entry to your application
     path.resolve(__dirname, "App.web.tsx"), // Updated to .jsx
-    // path.resolve(__dirname, "src"),
+    path.resolve(__dirname, "src"),
     // path.resolve(__dirname, "component"),
     ...compileNodeModules,
   ],
